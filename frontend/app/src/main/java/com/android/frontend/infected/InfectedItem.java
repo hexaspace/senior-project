@@ -1,43 +1,45 @@
 package com.android.frontend.infected;
 
 
-//const event = new Schema({
-//        date: String,
-//        time: String,
-//        location: String,
-//        createdAt: Date,
-//        updatedAt: Date
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-//infected
-//num: int
-//        });
 public class InfectedItem {
-    @SerializedName("id")
-    private int type; //아이템 타입 구분
+    //event model에 따라 변경할것. 아직 미정임.
+    private String type = "infectedEvent"; //아이템 타입 구분. 현재는 init 정했지만 추후 받아올것.
+    @SerializedName("_id")
+    private String _id; //_id
     //공통사항
     @SerializedName("location")
     private String location;
-    @SerializedName("createdAt")
-    private Date createdAt;
     //event
     @SerializedName("date")
     private String date;
     @SerializedName("time")
     private String time;
     //infected
-    @SerializedName("num")
-    private int num;    //감염인원
+//    @SerializedName("num")
+//    private int num;    //감염인원
 
-    public int getType() {
+    public InfectedItem() {
+    }
+
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getLocation() {
@@ -46,14 +48,6 @@ public class InfectedItem {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getDate() {
@@ -72,11 +66,23 @@ public class InfectedItem {
         this.time = time;
     }
 
-    public int getNum() {
-        return num;
-    }
+//    public int getNum() {
+//        return num;
+//    }
+//
+//    public void setNum(int num) {
+//        this.num = num;
+//    }
 
-    public void setNum(int num) {
-        this.num = num;
+
+    @Override
+    public String toString() {
+        return "InfectedItem{" +
+                "type='" + type + '\'' +
+                ", _id='" + _id + '\'' +
+                ", location='" + location + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                '}';
     }
 }

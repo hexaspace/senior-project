@@ -132,7 +132,7 @@ public class InfectedActivity extends AppCompatActivity {
                         tv_content.setText(content);
                         tv_sentAt.setText(ssentAt);
                         //서버로 전송
-                        //PostSms(userId, content,sentAt);
+                        PostSms(userId, content,sentAt);
                     }
                     // use msgData
                     i=i+1;
@@ -148,6 +148,7 @@ public class InfectedActivity extends AppCompatActivity {
         RetrofitClient retrofitClient = new RetrofitClient();
         //전달값을 MessageItem에 저장.
         MessageItem msg = new MessageItem(userId,content,sentAt);
+        Log.d(TAG, "message item : "+msg.toString());
 
         //excute login으로 post
         Call<Void> call = retrofitClient.server.createMessage(msg);

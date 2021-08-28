@@ -37,7 +37,7 @@ public class UserAdapter extends BaseAdapter {
         Context c = parent.getContext();    //고유한 값을 준다.
         if(convertView == null){
             LayoutInflater li = (LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = li.inflate(R.layout.layout_chatroom, parent,false);  //false바로 붙일것 아님. 하나하나 붙일것.
+            convertView = li.inflate(R.layout.layout_event, parent,false);  //false바로 붙일것 아님. 하나하나 붙일것.
 //            holder = new ViewHolder();  //뷰홀더더
 //            holder.tv_msg = (TextView) convertView.findViewById(R.id.tv_last_message);
 //            holder.tv_read = (TextView) convertView.findViewById(R.id.tv_last_notread);

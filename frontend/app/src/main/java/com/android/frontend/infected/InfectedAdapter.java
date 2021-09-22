@@ -18,9 +18,8 @@ public class InfectedAdapter extends BaseAdapter {
     //아이템 데이터 리스트
     ArrayList<InfectedItem> infectedItemList = new ArrayList<InfectedItem>();
     // 아이템의 종류 분류에 따라 view 매칭
-    private static final String ITEM_VIEW_TYPE_EVENT = "infectedEvent";
-    private static final String ITEM_VIEW_TYPE_COUNT = "infectedCount";
-//    private static final String ITEM_VIEW_TYPE_MAX = "2";
+    private static final String ITEM_VIEW_TYPE_EVENT = "event";
+    private static final String ITEM_VIEW_TYPE_COUNT = "count";
 
     public InfectedAdapter() {
     }
@@ -67,10 +66,8 @@ public class InfectedAdapter extends BaseAdapter {
                     convertView = inflater.inflate(R.layout.layout_infected, parent, false);
 
                     TextView tv_increased = (TextView) convertView.findViewById(R.id.tv_increased);
-
-                    //iconImageView.setImageDrawable(listViewItem.getIcon());
-                    String incresed = infectedItem.getLocation() + " 신규확진자 " ;//+infectedItem.getNum()+"명";
-                    tv_increased.setText(incresed);
+                    String incresedMessage = infectedItem.getDate()+infectedItem.getLocation() + " 신규확진자 " +infectedItem.getCount()+"명";
+                    tv_increased.setText(incresedMessage);
                     break;
             }
         }
@@ -79,10 +76,12 @@ public class InfectedAdapter extends BaseAdapter {
     }
     //기존 아이템 추가
     public void addItem(InfectedItem i){
+
         infectedItemList.add(i);
     }
 
-    // EVENT 아이템 추가를 위한 함수.
+    // 임의의 EVENT 아이템 추가를 위한 함수.
+    /*
     public void addItem(String location, String date, String time) {
         InfectedItem item = new InfectedItem() ;
 
@@ -92,8 +91,8 @@ public class InfectedAdapter extends BaseAdapter {
         item.setTime(time);
         infectedItemList.add(item) ;
     }
-
-    // COUNT 아이템 추가를 위한 함수.
+*/
+    // 임의의 COUNT 아이템 추가를 위한 함수.
 //    public void addItem(String location, int num) {//Drawable icon,
 //        InfectedItem item = new InfectedItem() ;
 //
@@ -105,11 +104,6 @@ public class InfectedAdapter extends BaseAdapter {
 //        infectedItemList.add(item);
 //    }
 
-    // type이 int가 아니라 사용불가
-//    @Override
-//    public int getItemViewType(int position) {
-//        return infectedItemList.get(position).getType();
-//    }
     public String getItemType(int position) {
         return infectedItemList.get(position).getType();
     }

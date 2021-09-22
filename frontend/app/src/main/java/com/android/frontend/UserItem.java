@@ -12,14 +12,12 @@ public class UserItem {
     color: { type: String, required: true }, //profile color
     createdAt: { type: Date, required: true }
     * */
-    @SerializedName("id")
+    @SerializedName("userId")
     private String id;
-    @SerializedName("name")
+    @SerializedName("username")
     private String name;
     @SerializedName("password")
     private String password;
-    @SerializedName("color")
-    private String color;
     @SerializedName("createdAt")
     private Date createdAt;
     public UserItem(){
@@ -51,14 +49,6 @@ public class UserItem {
         this.password = password;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -73,7 +63,6 @@ public class UserItem {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
-                ", color='" + color + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
     }

@@ -4,27 +4,33 @@ package com.android.frontend.infected;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
-
 public class InfectedItem {
     //event model에 따라 변경할것. 아직 미정임.
-    private String type = "infectedEvent"; //아이템 타입 구분. 현재는 init 정했지만 추후 받아올것.
-    @SerializedName("_id")
-    private String _id; //_id
+    @SerializedName("type")
+    private String type; //아이템 타입 구분. 현재는 init 정했지만 추후 받아올것.
+    @SerializedName("messageId")
+    private String messageId; //_id
     //공통사항
     @SerializedName("location")
     private String location;
-    //event
     @SerializedName("date")
     private String date;
+    //event
     @SerializedName("time")
-    private String time;
+    private String time="";
     //infected
-//    @SerializedName("num")
-//    private int num;    //감염인원
+    @SerializedName("count")
+    private int count=0;    //감염인원
 
-    public InfectedItem() {
+    public InfectedItem(String type, String messageId, String location, String date, String time, int count) {
+        this.type = type;
+        this.messageId = messageId;
+        this.location = location;
+        this.date = date;
+        this.time = time;
+        this.count = count;
     }
+
 
     public String getType() {
         return type;
@@ -34,12 +40,12 @@ public class InfectedItem {
         this.type = type;
     }
 
-    public String get_id() {
-        return _id;
+    public String getMessageId() {
+        return messageId;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
     }
 
     public String getLocation() {
@@ -66,23 +72,21 @@ public class InfectedItem {
         this.time = time;
     }
 
-//    public int getNum() {
-//        return num;
-//    }
-//
-//    public void setNum(int num) {
-//        this.num = num;
-//    }
+    public int getCount() {
+        return count;
+    }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     @Override
     public String toString() {
         return "InfectedItem{" +
                 "type='" + type + '\'' +
-                ", _id='" + _id + '\'' +
+                ", messageId='" + messageId + '\'' +
                 ", location='" + location + '\'' +
                 ", date='" + date + '\'' +
-                ", time='" + time + '\'' +
                 '}';
     }
 }

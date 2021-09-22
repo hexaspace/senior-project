@@ -58,8 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         HashMap<String, String> map = new HashMap<>();
         map.put("password", password);
-        map.put("id", id);
-        map.put("name", name);
+        map.put("userId", id);
+        map.put("username", name);
 
         Call<Void> call = retrofitClient.server.executeRegister(map);
 

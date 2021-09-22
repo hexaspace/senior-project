@@ -50,7 +50,10 @@ public class LoginActivity extends AppCompatActivity implements AutoPermissionsL
             @Override
             public void onClick(View v) {
                 loginUser(et_login_id.getText().toString(), et_login_pw.getText().toString());
-
+                //그냥 다음화면가기
+//                Intent intent = new Intent(getApplicationContext(), InfectedActivity.class);
+//                intent.putExtra("userId", et_login_id.getText().toString()); //id값 넘겨줌
+//                LoginActivity.this.startActivity(intent);
             }
         });
         //register화면으로 넘김
@@ -70,22 +73,24 @@ public class LoginActivity extends AppCompatActivity implements AutoPermissionsL
     }
     @Override
     public void onDenied(int i, String[] strings) {
-        Toast.makeText(this,"login] 권한거부됨"+strings.length,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"권한거부됨"+strings.length,Toast.LENGTH_LONG).show();
     }
     @Override
     public void onGranted(int i, String[] strings) {
-        Toast.makeText(this,"login] 권한승인됨"+strings.length,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"권한승인됨"+strings.length,Toast.LENGTH_LONG).show();
     }
     private void loginUser(String id, String password) {
         //server와 연결
         RetrofitClient retrofitClient = new RetrofitClient();
 
-        //전달값을 map에 저장.
+        //전달값을 map에 저장. executeLogin
         HashMap<String, String> map = new HashMap<>();
-        map.put("id", id);
+        map.put("userId", id);
         map.put("password", password);
         //excute login으로 post
         Call<Void> call = retrofitClient.server.executeLogin(map);
+        Log.d("login", String.valueOf(map));
+
         //call의 결과 확인
         call.enqueue(new Callback<Void>(){
             @Override
@@ -94,10 +99,9 @@ public class LoginActivity extends AppCompatActivity implements AutoPermissionsL
                 if (response.code() == 201) {
 
 
-                    Toast.makeText(LoginActivity.this, "login] Login successfully", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(LoginActivity.this, "login] Login successfully", Toast.LENGTH_LONG).show();
                     Log.d("login", String.valueOf(response.code()));
                     //성공했을때만 다음화면으로 넘어감
-                    //LoginResult user = new LoginResult(et_login_id.getText().toString(), et_login_pw.getText().toString());
                     Intent intent = new Intent(getApplicationContext(), InfectedActivity.class);
 
                     intent.putExtra("userId", id); //id값 넘겨줌
@@ -105,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements AutoPermissionsL
                     LoginActivity.this.startActivity(intent);
 
                 } else if (response.code() == 404) {
-                    Toast.makeText(LoginActivity.this, "login] Wrong Credentials",
+                    Toast.makeText(LoginActivity.this, "잘못된 로그인 정보입니다.",
                             Toast.LENGTH_LONG).show();
                     Log.d("login", String.valueOf(response.code()));
                 }
@@ -113,8 +117,9 @@ public class LoginActivity extends AppCompatActivity implements AutoPermissionsL
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("login", String.valueOf(call));
 
-                Toast.makeText(LoginActivity.this, "login] respond fail "+ t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "서버연결에 실패했습니다. "+ t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.d("login","response fail");
             }
         });
